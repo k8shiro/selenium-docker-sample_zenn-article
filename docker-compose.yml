@@ -1,0 +1,13 @@
+version: "3"
+services:
+  chrome:
+    image: selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210804
+    shm_size: 2gb
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+  python:
+    build: ./python
+    volumes:
+      - ./python:/python
+    tty: true
