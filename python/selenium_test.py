@@ -10,23 +10,58 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-class TestTest():
+class TestTest1():
   def setup_method(self, method):
-    self.driver = webdriver.Chrome()
+    #self.driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    self.driver = webdriver.Remote(
+        command_executor='http://chrome:4444/wd/hub',
+        options = webdriver.ChromeOptions()
+    )
     self.vars = {}
   
   def teardown_method(self, method):
     self.driver.quit()
   
-  def test_test(self):
-    self.driver.get("https://qiita.com/")
+  def test_test1(self):
+    self.driver.get("https://zenn.dev/")
     self.driver.set_window_size(1597, 898)
-    self.driver.find_element(By.LINK_TEXT, "Bashで終了ステータスごとに異なる処理を行いたい場合にハマった").click()
-    self.driver.execute_script("window.scrollTo(0,1700)")
-    self.driver.execute_script("window.scrollTo(0,2973)")
-    self.driver.execute_script("window.scrollTo(0,4662)")
-    self.driver.find_element(By.CSS_SELECTOR, ".st-RenewalHeader_logo > svg").click()
-    self.driver.find_element(By.LINK_TEXT, "「論理パーティション」の管理方法・データ構造を説明できますか？").click()
-    self.driver.find_element(By.CSS_SELECTOR, ".st-RenewalHeader_logo > svg").click()
-    self.driver.find_element(By.LINK_TEXT, "高い移植性と生産性を両立するソフトウェアを書くのに必要な知識と考え方 〜30年前のPOSIXシェルにも対応するシェルスクリプトはどうやって実現させたのか〜").click()
+    self.driver.find_element(By.LINK_TEXT, "Articles").click()
+    element = self.driver.find_element(By.LINK_TEXT, "Articles")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    element = self.driver.find_element(By.CSS_SELECTOR, "body")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    self.driver.find_element(By.LINK_TEXT, "Books").click()
+    element = self.driver.find_element(By.LINK_TEXT, "Books")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    element = self.driver.find_element(By.CSS_SELECTOR, "body")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    self.driver.find_element(By.LINK_TEXT, "Scraps").click()
+    element = self.driver.find_element(By.LINK_TEXT, "Scraps")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    element = self.driver.find_element(By.CSS_SELECTOR, "body")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    self.driver.find_element(By.CSS_SELECTOR, "#header-search > svg").click()
+    time.sleep(1)
+    from selenium.webdriver.support.ui import WebDriverWait
+    self.driver.find_element(By.CSS_SELECTOR, ".search_searchformField__1JsnC").click()
+    self.driver.find_element(By.CSS_SELECTOR, ".search_searchformField__1JsnC").send_keys("Docker")
+    time.sleep(3)
+    self.driver.find_element(By.CSS_SELECTOR, ".search_searchformButton__1hnWU").click()
+    self.driver.find_element(By.ID, "footer").click()
+    time.sleep(3)
+    self.driver.find_element(By.CSS_SELECTOR, ".Button_secondary__3YnG6").click()
+    element = self.driver.find_element(By.CSS_SELECTOR, ".Button_secondary__3YnG6")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    element = self.driver.find_element(By.CSS_SELECTOR, "body")
+    actions = ActionChains(self.driver)
+    actions.move_to_element(element).perform()
+    self.driver.execute_script("window.scrollTo(0,0)")
   
